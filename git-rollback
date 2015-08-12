@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# git-c
+#
+# Brandon Miller
+# quick rollback of develop to a certain commit
+
+git checkout develop
+git reset --hard 7132996c5c7f66952d1230d100e4b4e431188ad7
+git push -f origin HEAD
