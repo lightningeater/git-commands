@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Check if params are enough to go ahead.
+# Find which is your current branch
+if currentBranch=$(git symbolic-ref --short -q HEAD)
+then
+    echo On branch "$currentBranch"
+    echo "Pushing to origin as branch $currentBranch ..."
+
+    # Push the current branch and set the remote as upstream
+    git push -u origin "$currentBranch"
+
+    echo "The $currentBranch has been pushed to origin"
+else
+    echo ERROR: Cannot find the current branch!
+fi
+# git up

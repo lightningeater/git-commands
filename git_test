@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Check if params are enough to go ahead.
+sourceBranch=$1
+switch=$2
+test -z "$sourceBranch" && echo "ERROR: Please provide the source remote branch." 1>&2 && exit 1
+test -z "$switch" && echo "Switch empty" 1>&2
+test -n "$switch" && test "$switch" != "--prune" && echo "Switch invalid! Allowed switch(es) are --prune" 1>&2 && exit 1
+
+# Find which is your current branch
+if currentBranch=$(git symbolic-ref --short -q HEAD)
+then
+    echo On branch "$currentBranch"
+    echo "Pulling updates from the remote branch $sourceBranch ..."
+    # Checkout remote branch from where you want to update. 
+    git checkout "$sourceBranch"
+    # Delete all branches that are merged into source branch
+
+    if [ "$switch" == "--prune" ]
+    then
+        echo "$switch"
+    fi
+else
+    echo ERROR: Cannot find the current branch!
+fi
+
+# 
